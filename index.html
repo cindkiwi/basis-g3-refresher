@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASIS G3 Master Audio Flashcards</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      /* 护眼暖白/米灰高雅背景 */
+      background-color: #f7f8fa;
+      color: #2c3e50;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 36px 24px;
+      width: 100%;
+      max-width: 520px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 1px solid #e1e4e8;
+      margin-bottom: 20px;
+    }
+    .tag {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      letter-spacing: 1px;
+    }
+    /* 莫兰迪低饱和度护眼配色 */
+    .tag-math { background-color: #e3f2fd; color: #1565c0; }
+    .tag-english { background-color: #fff3e0; color: #e65100; }
+    .tag-measurement { background-color: #e8f5e9; color: #2e7d32; }
+    .tag-thinking { background-color: #f3e5f5; color: #7b1fa2; }
+    
+    /* 极致超大字号术语标题 */
+    .term {
+      font-size: 3.2rem;
+      font-weight: 900;
+      color: #1a202c;
+      margin-bottom: 16px;
+      word-break: break-word;
+      line-height: 1.15;
+    }
+    .definition {
+      font-size: 1.35rem;
+      color: #4a5568;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      min-height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .example {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: #276749;
+      background: #f0fff4;
+      padding: 14px;
+      border-radius: 14px;
+      border-left: 4px solid #38a169;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+    .btn {
+      background-color: #6b46c1;
+      color: #fff;
+      border: none;
+      padding: 18px 32px;
+      font-size: 1.25rem;
+      font-weight: bold;
+      border-radius: 30px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(107, 70, 193, 0.3);
+    }
+    .btn:active {
+      transform: scale(0.98);
+    }
+    .btn-secondary {
+      background-color: #edf2f7;
+      color: #2d3748;
+      box-shadow: none;
+      border: 1px solid #cbd5e0;
+    }
+    .btn-manual {
+      background-color: #319795;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(49, 151, 149, 0.3);
+    }
+    .controls {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      max-width: 520px;
+    }
+    .status-text {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #718096;
+      font-weight: 600;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div id="category-tag" class="tag tag-math">Math Term</div>
+    <div id="term-text" class="term">Loading...</div>
+    <div id="definition-text" class="definition">准备就绪</div>
+    <div id="example-text" class="example hidden"></div>
+  </div>
+
+  <div style="width:100%; max-width:520px;">
+    <button id="show-answer-btn" class="btn btn-manual" onclick="showAnswer()">💡 显示答案 (秒出结果)</button>
+    <button id="main-btn" class="btn" onclick="toggleAudioFlow()">▶ 开启/停止 语音自动复习 (8秒思考)</button>
+    <div class="controls" style="margin-top: 12px;">
+      <button class="btn btn-secondary" onclick="prevCard()">上一题</button>
+      <button class="btn btn-secondary" onclick="nextCard()">下一题</button>
+    </div>
+  </div>
+
+  <div id="status" class="status-text">就绪：点击“开启语音自动复习”或点击“上一题/下一题”翻页。</div>
+
+  <script>
+    // 词库：几何与英语修辞前置，计量单位与口算后置
+    const flashcards = [
+      // 1. Saxon Math L20-28 几何核心蓝体字 (前置)
+      { category: "Math", term: "Line", question: "What is a line?", answer: "A straight path that goes on forever in both directions without ending.", example: "Arrows on both ends show it goes on forever." },
+      { category: "Math", term: "Ray", question: "What is a ray?", answer: "A part of a line that has one endpoint and goes on forever in only one direction.", example: "A sunbeam is like a ray." },
+      { category: "Math", term: "Line Segment", question: "What is a line segment?", answer: "A part of a line that has two endpoints.", example: "The edge of a ruler is a line segment." },
+      { category: "Math", term: "Endpoints", question: "What are endpoints?", answer: "Points at which a line segment or a ray ends.", example: "A line segment has two endpoints." },
+      { category: "Math", term: "Vertex", question: "What is a vertex?", answer: "The point where two line segments, rays, or sides meet to form an angle.", example: "The corner of a triangle is a vertex." },
+      { category: "Math", term: "Parallel Lines", question: "What are parallel lines?", answer: "Lines or segments that go in the same direction and stay the same distance apart without crossing.", example: "Train tracks are parallel." },
+      { category: "Math", term: "Intersecting Lines", question: "What are intersecting lines?", answer: "Lines or segments that cross or meet at one common point.", example: "An X shape is two intersecting lines." },
+      { category: "Math", term: "Perpendicular", question: "What does perpendicular mean?", answer: "Intersecting lines or segments that form square corners, or 90-degree angles.", example: "The sides of a square are perpendicular." },
+      { category: "Math", term: "Radius", question: "What is the radius of a circle?", answer: "A line segment from the center of a circle to any point on its boundary.", example: "The radius is half of the diameter." },
+      { category: "Math", term: "Diameter", question: "What is the diameter of a circle?", answer: "A line segment that passes through the center of a circle and connects two points on its boundary.", example: "The diameter splits a circle in half." },
+      { category: "Math", term: "Compass", question: "What is a compass used for in math?", answer: "A geometric tool used to draw circles and arcs with a precise radius.", example: "Pin the needle and spin the pencil." },
+
+      // 2. 乘法性质与思维架构题 (前置)
+      { category: "Thinking", term: "Properties of Multiplication", question: "What are the three core properties of multiplication?", answer: "The Commutative Property, the Identity Property, and the Zero Property.", example: "They help simplify complex calculations." },
+      { category: "Thinking", term: "Commutative Property", question: "What is the Commutative Property of multiplication?", answer: "Changing the order of factors does not change the product. For example, 3 times 4 equals 4 times 3.", example: "3 × 4 = 4 × 3 = 12." },
+      { category: "Thinking", term: "Identity Property", question: "What is the Identity Property of multiplication?", answer: "Multiplying any number by 1 gives a product equal to that same number.", example: "8 × 1 = 8." },
+      { category: "Thinking", term: "Zero Property", question: "What is the Zero Property of multiplication?", answer: "Multiplying any number by 0 always results in a product of 0.", example: "100 × 0 = 0." },
+      { category: "Thinking", term: "Reasonable Estimate", question: "What is a reasonable estimate?", answer: "An educated guess close to the exact answer, obtained by rounding numbers.", example: "Rounding $49 to $50 gives a reasonable estimate." },
+
+      // 3. English Figurative Language & Grammar (前置)
+      { category: "English", term: "Simile", question: "What is a simile?", answer: "A figure of speech comparing two different things using the words 'like' or 'as'.", example: "As brave as a lion." },
+      { category: "English", term: "Alliteration", question: "What is alliteration?", answer: "The repetition of the same starting consonant sound in a group of words.", example: "Peter Piper picked a peck of pickled peppers." },
+      { category: "English", term: "Rhyme", question: "What is rhyme?", answer: "Words that have the same or similar ending sounds.", example: "Cat, hat, sat, and mat." },
+      { category: "English", term: "Onomatopoeia", question: "What is onomatopoeia?", answer: "A word that imitates the natural sound of a thing.", example: "Buzz, hiss, pop, and splash." },
+      { category: "English", term: "Independent Clause", question: "What is an independent clause?", answer: "A group of words with a subject and verb that expresses a complete thought and can stand alone as a sentence.", example: "The cat slept on the rug." },
+      { category: "English", term: "Dependent Clause", question: "What is a dependent clause?", answer: "A group of words with a subject and verb that does NOT express a complete thought and cannot stand alone.", example: "Because it was raining..." },
+
+      // 4. 英制单位与换算 (后置)
+      { category: "Measurement", term: "Inch (in)", question: "What is an inch, and what is its abbreviation?", answer: "An inch (abbreviated as in) is a small unit of length. Twelve inches equal one foot.", example: "A paperclip is about 1 inch long." },
+      { category: "Measurement", term: "Foot / Feet (ft)", question: "What is a foot, and what is its conversion to inches?", answer: "A foot (plural: feet, abbreviated as ft) equals 12 inches. Three feet equal one yard.", example: "A skateboard is about 3 feet long." },
+      { category: "Measurement", term: "Yard (yd)", question: "What is a yard, and what is its conversion to feet?", answer: "A yard (abbreviated as yd) equals 3 feet or 36 inches.", example: "A baseball bat is about 1 yard long." },
+      { category: "Measurement", term: "Mile (mi)", question: "What is a mile, and what is its conversion to yards?", answer: "A mile (abbreviated as mi) equals 5,280 feet or 1,760 yards.", example: "Walking 20 blocks is roughly 1 mile." },
+      { category: "Measurement", term: "Drill: Feet to Inches", question: "Quick mental math: How many inches are in 3 feet?", answer: "36 inches. Because 3 times 12 equals 36.", example: "3 feet = 1 yard = 36 inches." },
+
+      // 5. 公制单位与换算 (后置)
+      { category: "Measurement", term: "Millimeter (mm)", question: "What is a millimeter, and what is its abbreviation?", answer: "A millimeter (abbreviated as mm) is a tiny metric unit. 10 millimeters equal 1 centimeter.", example: "A credit card thickness is about 1 millimeter." },
+      { category: "Measurement", term: "Centimeter (cm)", question: "What is a centimeter, and what is its conversion to millimeters?", answer: "A centimeter (abbreviated as cm) equals 10 millimeters. 100 centimeters equal 1 meter.", example: "A fingernail width is about 1 centimeter." },
+      { category: "Measurement", term: "Meter (m)", question: "What is a meter, and what is its conversion to centimeters?", answer: "A meter (abbreviated as m) equals 100 centimeters or 1,000 millimeters.", example: "A door width is roughly 1 meter." },
+      { category: "Measurement", term: "Kilometer (km)", question: "What is a kilometer, and what is its conversion to meters?", answer: "A kilometer (abbreviated as km) equals 1,000 meters.", example: "Running 2.5 laps on a track is roughly 1 kilometer." },
+      { category: "Measurement", term: "Drill: Meters to Centimeters", question: "Quick mental math: How many centimeters are in 5 meters?", answer: "500 centimeters. Because 5 times 100 equals 500.", example: "5 m = 500 cm." },
+
+      // 6. 乘法口算级练习 (后置)
+      { category: "Math", term: "Mental Math: 7 × 8", question: "Quick mental math: What is 7 times 8?", answer: "7 times 8 equals 56.", example: "5, 6, 7, 8 -> 56 = 7 × 8." },
+      { category: "Math", term: "Mental Math: 9 × 6", question: "Quick mental math: What is 9 times 6?", answer: "9 times 6 equals 54.", example: "9 × 6 = 54." },
+      { category: "Math", term: "Mental Math: 54 ÷ 6", question: "Quick mental math: What is 54 divided by 6?", answer: "54 divided by 6 equals 9, because 9 times 6 equals 54.", example: "Inverse of multiplication." }
+    ];
+
+    let currentIndex = 0;
+    let isPlaying = false;
+    let timerId = null;
+    let countdownInterval = null;
+
+    function renderCard() {
+      const item = flashcards[currentIndex];
+      const tagEl = document.getElementById('category-tag');
+      
+      tagEl.innerText = `${item.category} (${currentIndex + 1}/${flashcards.length})`;
+      tagEl.className = `tag tag-${item.category.toLowerCase()}`;
+      
+      document.getElementById('term-text').innerText = item.term;
+      document.getElementById('definition-text').innerText = item.question;
+      
+      const exampleEl = document.getElementById('example-text');
+      exampleEl.classList.add('hidden');
+      document.getElementById('status').innerText = `已准备好第 ${currentIndex + 1} 题。`;
+    }
+
+    function showAnswer() {
+      stopAudioFlow();
+      const item = flashcards[currentIndex];
+      document.getElementById('definition-text').innerText = item.answer;
+      
+      const exampleEl = document.getElementById('example-text');
+      if (item.example) {
+        exampleEl.innerText = `Example: ${item.example}`;
+        exampleEl.classList.remove('hidden');
+      }
+      document.getElementById('status').innerText = "已手动公布答案。";
+    }
+
+    // 智能筛选最流畅的女声 (Female Voice)
+    function speakText(text, callback) {
+      if (!('speechSynthesis' in window)) {
+        if (callback) callback();
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-US';
+      utter.rate = 0.88; 
+
+      const voices = window.speechSynthesis.getVoices();
+      // 优先筛选 iOS/Mac/Windows/Android 中品质最高的女声
+      const femaleVoice = voices.find(v => 
+        v.lang.startsWith('en') && (
+          v.name.includes('Samantha') || 
+          v.name.includes('Victoria') || 
+          v.name.includes('Zira') || 
+          v.name.includes('Google US English') ||
+          v.name.includes('Natural') ||
+          v.name.includes('Jenny')
+        )
+      ) || voices.find(v => v.lang.startsWith('en'));
+
+      if (femaleVoice) utter.voice = femaleVoice;
+
+      let called = false;
+      utter.onend = () => { if(!called){ called=true; if(callback) callback(); } };
+      utter.onerror = () => { if(!called){ called=true; if(callback) callback(); } };
+
+      window.speechSynthesis.speak(utter);
+    }
+
+    // 8 秒倒计时功能
+    function startCountdown(sec, callback) {
+      let left = sec;
+      document.getElementById('status').innerText = `思考中...（还剩 ${left} 秒公布答案）`;
+      
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        left--;
+        if (left > 0) {
+          document.getElementById('status').innerText = `思考中...（还剩 ${left} 秒公布答案）`;
+        } else {
+          clearInterval(countdownInterval);
+          if (callback) callback();
+        }
+      }, 1000);
+    }
+
+    function playFlow() {
+      if (!isPlaying) return;
+      renderCard();
+      const item = flashcards[currentIndex];
+      document.getElementById('status').innerText = "正在提问...";
+
+      speakText(`Question ${currentIndex + 1}. ${item.question}`, () => {
+        if (!isPlaying) return;
+
+        // 留出严格的 8 秒思考时间
+        startCountdown(8, () => {
+          if (!isPlaying) return;
+
+          document.getElementById('definition-text').innerText = item.answer;
+          document.getElementById('example-text').classList.remove('hidden');
+          document.getElementById('status').innerText = "公布正确答案...";
+
+          let ansText = `Answer: ${item.answer}`;
+          if (item.example) ansText += ` Example: ${item.example}`;
+
+          speakText(ansText, () => {
+            if (!isPlaying) return;
+            document.getElementById('status').innerText = "准备进入下一题...";
+
+            timerId = setTimeout(() => {
+              if (!isPlaying) return;
+              nextCard(true);
+            }, 3000);
+          });
+        });
+      });
+    }
+
+    function toggleAudioFlow() {
+      if (isPlaying) {
+        stopAudioFlow();
+      } else {
+        isPlaying = true;
+        document.getElementById('main-btn').innerText = "⏹ 停止语音朗读";
+        playFlow();
+      }
+    }
+
+    function stopAudioFlow() {
+      isPlaying = false;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      clearTimeout(timerId);
+      clearInterval(countdownInterval);
+      document.getElementById('main-btn').innerText = "▶ 开启/停止 语音自动复习 (8秒思考)";
+      document.getElementById('status').innerText = "已停止语音。";
+    }
+
+    function nextCard(autoPlay = false) {
+      stopAudioFlow();
+      currentIndex = (currentIndex + 1) % flashcards.length;
+      renderCard();
+      if (autoPlay) {
+        isPlaying = true;
+        document.getElementById('main-btn').innerText = "⏹ 停止语音朗读";
+        playFlow();
+      }
+    }
+
+    function prevCard() {
+      stopAudioFlow();
+      currentIndex = (currentIndex - 1 + flashcards.length) % flashcards.length;
+      renderCard();
+    }
+
+    window.onload = function() {
+      renderCard();
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.onvoiceschanged = () => {};
+      }
+    };
+  </script>
+</body>
+</html>
