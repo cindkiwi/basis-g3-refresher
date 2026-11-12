@@ -46,12 +46,11 @@
     /* 莫兰迪低饱和度护眼配色 */
     .tag-math { background-color: #e3f2fd; color: #1565c0; }
     .tag-english { background-color: #fff3e0; color: #e65100; }
-    .tag-measurement { background-color: #e8f5e9; color: #2e7d32; }
     .tag-thinking { background-color: #f3e5f5; color: #7b1fa2; }
     
     /* 极致超大字号术语标题 */
     .term {
-      font-size: 3.2rem;
+      font-size: 3.1rem;
       font-weight: 900;
       color: #1a202c;
       margin-bottom: 16px;
@@ -143,54 +142,141 @@
   <div id="status" class="status-text">就绪：点击“开启语音自动复习”或点击“上一题/下一题”翻页。</div>
 
   <script>
-    // 词库：几何与英语修辞前置，计量单位与口算后置
+    // 最新定制 BASIS G3 车上复习词库与题库
     const flashcards = [
-      // 1. Saxon Math L20-28 几何核心蓝体字 (前置)
-      { category: "Math", term: "Line", question: "What is a line?", answer: "A straight path that goes on forever in both directions without ending.", example: "Arrows on both ends show it goes on forever." },
-      { category: "Math", term: "Ray", question: "What is a ray?", answer: "A part of a line that has one endpoint and goes on forever in only one direction.", example: "A sunbeam is like a ray." },
-      { category: "Math", term: "Line Segment", question: "What is a line segment?", answer: "A part of a line that has two endpoints.", example: "The edge of a ruler is a line segment." },
-      { category: "Math", term: "Endpoints", question: "What are endpoints?", answer: "Points at which a line segment or a ray ends.", example: "A line segment has two endpoints." },
-      { category: "Math", term: "Vertex", question: "What is a vertex?", answer: "The point where two line segments, rays, or sides meet to form an angle.", example: "The corner of a triangle is a vertex." },
-      { category: "Math", term: "Parallel Lines", question: "What are parallel lines?", answer: "Lines or segments that go in the same direction and stay the same distance apart without crossing.", example: "Train tracks are parallel." },
-      { category: "Math", term: "Intersecting Lines", question: "What are intersecting lines?", answer: "Lines or segments that cross or meet at one common point.", example: "An X shape is two intersecting lines." },
-      { category: "Math", term: "Perpendicular", question: "What does perpendicular mean?", answer: "Intersecting lines or segments that form square corners, or 90-degree angles.", example: "The sides of a square are perpendicular." },
-      { category: "Math", term: "Radius", question: "What is the radius of a circle?", answer: "A line segment from the center of a circle to any point on its boundary.", example: "The radius is half of the diameter." },
-      { category: "Math", term: "Diameter", question: "What is the diameter of a circle?", answer: "A line segment that passes through the center of a circle and connects two points on its boundary.", example: "The diameter splits a circle in half." },
-      { category: "Math", term: "Compass", question: "What is a compass used for in math?", answer: "A geometric tool used to draw circles and arcs with a precise radius.", example: "Pin the needle and spin the pencil." },
+      // 1. 平方直接心算与平方根
+      {
+        category: "Math",
+        term: "3 squared = ?",
+        question: "What does 3 squared equal?",
+        answer: "3 squared equals 9. Because 3 times 3 equals 9.",
+        example: "Squaring a number means multiplying it by itself."
+      },
+      {
+        category: "Math",
+        term: "5 squared = ?",
+        question: "What does 5 squared equal?",
+        answer: "5 squared equals 25. Because 5 times 5 equals 25.",
+        example: "5 squared is written as 5 with a small 2 at the top right."
+      },
+      {
+        category: "Math",
+        term: "7 squared = ?",
+        question: "What does 7 squared equal?",
+        answer: "7 squared equals 49. Because 7 times 7 equals 49.",
+        example: "49 is a perfect square."
+      },
+      {
+        category: "Math",
+        term: "Square Root",
+        question: "What is a square root, and what is the square root of 36?",
+        answer: "A square root is a number that multiplies by itself to make the original number. The square root of 36 is 6.",
+        example: "Because 6 times 6 equals 36, the square root of 36 is 6."
+      },
 
-      // 2. 乘法性质与思维架构题 (前置)
-      { category: "Thinking", term: "Properties of Multiplication", question: "What are the three core properties of multiplication?", answer: "The Commutative Property, the Identity Property, and the Zero Property.", example: "They help simplify complex calculations." },
-      { category: "Thinking", term: "Commutative Property", question: "What is the Commutative Property of multiplication?", answer: "Changing the order of factors does not change the product. For example, 3 times 4 equals 4 times 3.", example: "3 × 4 = 4 × 3 = 12." },
-      { category: "Thinking", term: "Identity Property", question: "What is the Identity Property of multiplication?", answer: "Multiplying any number by 1 gives a product equal to that same number.", example: "8 × 1 = 8." },
-      { category: "Thinking", term: "Zero Property", question: "What is the Zero Property of multiplication?", answer: "Multiplying any number by 0 always results in a product of 0.", example: "100 × 0 = 0." },
-      { category: "Thinking", term: "Reasonable Estimate", question: "What is a reasonable estimate?", answer: "An educated guess close to the exact answer, obtained by rounding numbers.", example: "Rounding $49 to $50 gives a reasonable estimate." },
+      // 2. 几何概念与作图方法
+      {
+        category: "Math",
+        term: "Vertex",
+        question: "What is a vertex?",
+        answer: "The point where two line segments, rays, or sides meet to form an angle.",
+        example: "The corner where two sides of a triangle meet is a vertex."
+      },
+      {
+        category: "Math",
+        term: "How to Draw Parallel Lines",
+        question: "How do you draw parallel lines?",
+        answer: "Draw two straight lines going in the exact same direction that stay the same distance apart so they never cross.",
+        example: "Like drawing the two rails of a train track."
+      },
+      {
+        category: "Math",
+        term: "How to Draw Intersecting Rays",
+        question: "How do you draw intersecting rays?",
+        answer: "Draw two rays that each start at an endpoint, go forever in one direction, and cross or meet at one common point.",
+        example: "Each ray must have one dot at the start and one arrow at the other end."
+      },
+      {
+        category: "Math",
+        term: "How to Draw Perpendicular Line Segments",
+        question: "How do you draw perpendicular line segments?",
+        answer: "Draw two line segments with endpoints at both ends that meet or cross to form a square corner, or a 90-degree right angle.",
+        example: "Like drawing the letter L or a plus sign with endpoints."
+      },
 
-      // 3. English Figurative Language & Grammar (前置)
-      { category: "English", term: "Simile", question: "What is a simile?", answer: "A figure of speech comparing two different things using the words 'like' or 'as'.", example: "As brave as a lion." },
-      { category: "English", term: "Alliteration", question: "What is alliteration?", answer: "The repetition of the same starting consonant sound in a group of words.", example: "Peter Piper picked a peck of pickled peppers." },
-      { category: "English", term: "Rhyme", question: "What is rhyme?", answer: "Words that have the same or similar ending sounds.", example: "Cat, hat, sat, and mat." },
-      { category: "English", term: "Onomatopoeia", question: "What is onomatopoeia?", answer: "A word that imitates the natural sound of a thing.", example: "Buzz, hiss, pop, and splash." },
-      { category: "English", term: "Independent Clause", question: "What is an independent clause?", answer: "A group of words with a subject and verb that expresses a complete thought and can stand alone as a sentence.", example: "The cat slept on the rug." },
-      { category: "English", term: "Dependent Clause", question: "What is a dependent clause?", answer: "A group of words with a subject and verb that does NOT express a complete thought and cannot stand alone.", example: "Because it was raining..." },
+      // 3. 估算思维与乘法三大性质
+      {
+        category: "Thinking",
+        term: "Reasonable Estimate",
+        question: "What is a reasonable estimate?",
+        answer: "An educated guess close to the exact answer, found by rounding numbers to make math easier.",
+        example: "Rounding $48 to $50 gives a reasonable estimate."
+      },
+      {
+        category: "Thinking",
+        term: "Properties of Multiplication",
+        question: "What are the three core properties of multiplication?",
+        answer: "The Commutative Property, the Identity Property, and the Zero Property.",
+        example: "Knowing these properties helps simplify mental math."
+      },
+      {
+        category: "Thinking",
+        term: "Commutative of Multiplication",
+        question: "What is the Commutative Property of multiplication?",
+        answer: "Changing the order of the factors does not change the product.",
+        example: "3 times 4 equals 4 times 3; both equal 12."
+      },
+      {
+        category: "Thinking",
+        term: "Identity Property",
+        question: "What is the Identity Property of multiplication?",
+        answer: "Multiplying any number by 1 gives a product equal to that same number.",
+        example: "9 times 1 equals 9."
+      },
+      {
+        category: "Thinking",
+        term: "Zero Property",
+        question: "What is the Zero Property of multiplication?",
+        answer: "Multiplying any number by 0 always results in a product of 0.",
+        example: "25 times 0 equals 0."
+      },
 
-      // 4. 英制单位与换算 (后置)
-      { category: "Measurement", term: "Inch (in)", question: "What is an inch, and what is its abbreviation?", answer: "An inch (abbreviated as in) is a small unit of length. Twelve inches equal one foot.", example: "A paperclip is about 1 inch long." },
-      { category: "Measurement", term: "Foot / Feet (ft)", question: "What is a foot, and what is its conversion to inches?", answer: "A foot (plural: feet, abbreviated as ft) equals 12 inches. Three feet equal one yard.", example: "A skateboard is about 3 feet long." },
-      { category: "Measurement", term: "Yard (yd)", question: "What is a yard, and what is its conversion to feet?", answer: "A yard (abbreviated as yd) equals 3 feet or 36 inches.", example: "A baseball bat is about 1 yard long." },
-      { category: "Measurement", term: "Mile (mi)", question: "What is a mile, and what is its conversion to yards?", answer: "A mile (abbreviated as mi) equals 5,280 feet or 1,760 yards.", example: "Walking 20 blocks is roughly 1 mile." },
-      { category: "Measurement", term: "Drill: Feet to Inches", question: "Quick mental math: How many inches are in 3 feet?", answer: "36 inches. Because 3 times 12 equals 36.", example: "3 feet = 1 yard = 36 inches." },
-
-      // 5. 公制单位与换算 (后置)
-      { category: "Measurement", term: "Millimeter (mm)", question: "What is a millimeter, and what is its abbreviation?", answer: "A millimeter (abbreviated as mm) is a tiny metric unit. 10 millimeters equal 1 centimeter.", example: "A credit card thickness is about 1 millimeter." },
-      { category: "Measurement", term: "Centimeter (cm)", question: "What is a centimeter, and what is its conversion to millimeters?", answer: "A centimeter (abbreviated as cm) equals 10 millimeters. 100 centimeters equal 1 meter.", example: "A fingernail width is about 1 centimeter." },
-      { category: "Measurement", term: "Meter (m)", question: "What is a meter, and what is its conversion to centimeters?", answer: "A meter (abbreviated as m) equals 100 centimeters or 1,000 millimeters.", example: "A door width is roughly 1 meter." },
-      { category: "Measurement", term: "Kilometer (km)", question: "What is a kilometer, and what is its conversion to meters?", answer: "A kilometer (abbreviated as km) equals 1,000 meters.", example: "Running 2.5 laps on a track is roughly 1 kilometer." },
-      { category: "Measurement", term: "Drill: Meters to Centimeters", question: "Quick mental math: How many centimeters are in 5 meters?", answer: "500 centimeters. Because 5 times 100 equals 500.", example: "5 m = 500 cm." },
-
-      // 6. 乘法口算级练习 (后置)
-      { category: "Math", term: "Mental Math: 7 × 8", question: "Quick mental math: What is 7 times 8?", answer: "7 times 8 equals 56.", example: "5, 6, 7, 8 -> 56 = 7 × 8." },
-      { category: "Math", term: "Mental Math: 9 × 6", question: "Quick mental math: What is 9 times 6?", answer: "9 times 6 equals 54.", example: "9 × 6 = 54." },
-      { category: "Math", term: "Mental Math: 54 ÷ 6", question: "Quick mental math: What is 54 divided by 6?", answer: "54 divided by 6 equals 9, because 9 times 6 equals 54.", example: "Inverse of multiplication." }
+      // 4. 英语修辞与语法比较级
+      {
+        category: "English",
+        term: "Alliteration",
+        question: "What is alliteration?",
+        answer: "The repetition of the same beginning consonant sound in words close together.",
+        example: "Silly snakes slither silently."
+      },
+      {
+        category: "English",
+        term: "Assonance",
+        question: "What is assonance?",
+        answer: "The repetition of similar vowel sounds inside words that are close together.",
+        example: "The rain in Spain stays mainly in the plain."
+      },
+      {
+        category: "English",
+        term: "Rhyme",
+        question: "What is rhyme?",
+        answer: "Words that have the same or similar ending sounds.",
+        example: "Star, car, far, and jar."
+      },
+      {
+        category: "English",
+        term: "Comparative",
+        question: "What is a comparative adjective or adverb?",
+        answer: "A word used to compare two things, often ending in '-er' or using the word 'more'.",
+        example: "Taller, faster, or more interesting."
+      },
+      {
+        category: "English",
+        term: "Superlative",
+        question: "What is a superlative adjective or adverb?",
+        answer: "A word used to compare three or more things to show the highest degree, often ending in '-est' or using 'most'.",
+        example: "Tallest, fastest, or most interesting."
+      }
     ];
 
     let currentIndex = 0;
@@ -238,7 +324,6 @@
       utter.rate = 0.88; 
 
       const voices = window.speechSynthesis.getVoices();
-      // 优先筛选 iOS/Mac/Windows/Android 中品质最高的女声
       const femaleVoice = voices.find(v => 
         v.lang.startsWith('en') && (
           v.name.includes('Samantha') || 
