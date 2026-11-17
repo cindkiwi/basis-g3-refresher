@@ -66,6 +66,16 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-wrap: wrap;
+    }
+    /* 词性练习下划线高亮样式 */
+    .definition u {
+      text-decoration: underline;
+      text-decoration-thickness: 3px;
+      text-underline-offset: 5px;
+      color: #6b46c1;
+      font-weight: 800;
+      padding: 0 4px;
     }
     .example {
       font-size: 1.05rem;
@@ -124,7 +134,7 @@
 <body>
 
   <div class="card">
-    <div id="category-tag" class="tag tag-math">Math Term</div>
+    <div id="category-tag" class="tag tag-english">English Term</div>
     <div id="term-text" class="term">Loading...</div>
     <div id="definition-text" class="definition">准备就绪</div>
     <div id="example-text" class="example hidden"></div>
@@ -144,37 +154,169 @@
   <script>
     // 最新定制 BASIS G3 车上复习词库与题库
     const flashcards = [
-      // 1. 平方直接心算与平方根
+      // 1. 英语词性基础概念 (Parts of Speech Definitions)
       {
-        category: "Math",
-        term: "3 squared = ?",
-        question: "What does 3 squared equal?",
-        answer: "3 squared equals 9. Because 3 times 3 equals 9.",
-        example: "Squaring a number means multiplying it by itself."
+        category: "English",
+        term: "Noun",
+        question: "What is a noun?",
+        answer: "A noun is a word that names a person, place, thing, or idea.",
+        example: "Teacher, school, pencil, and happiness are nouns."
       },
       {
-        category: "Math",
-        term: "5 squared = ?",
-        question: "What does 5 squared equal?",
-        answer: "5 squared equals 25. Because 5 times 5 equals 25.",
-        example: "5 squared is written as 5 with a small 2 at the top right."
+        category: "English",
+        term: "Verb",
+        question: "What is a verb?",
+        answer: "A verb is a word that shows an action or a state of being.",
+        example: "Run, jump, think, and is are verbs."
       },
       {
-        category: "Math",
-        term: "7 squared = ?",
-        question: "What does 7 squared equal?",
-        answer: "7 squared equals 49. Because 7 times 7 equals 49.",
-        example: "49 is a perfect square."
+        category: "English",
+        term: "Adjective",
+        question: "What is an adjective?",
+        answer: "An adjective is a word that describes or modifies a noun or pronoun.",
+        example: "The fluffy, white dog barked loudly."
       },
       {
-        category: "Math",
-        term: "Square Root",
-        question: "What is a square root, and what is the square root of 36?",
-        answer: "A square root is a number that multiplies by itself to make the original number. The square root of 36 is 6.",
-        example: "Because 6 times 6 equals 36, the square root of 36 is 6."
+        category: "English",
+        term: "Adverb",
+        question: "What is an adverb?",
+        answer: "An adverb is a word that describes a verb, an adjective, or another adverb, often ending in '-ly'.",
+        example: "She ran quickly to catch the bus."
+      },
+      {
+        category: "English",
+        term: "Pronoun",
+        question: "What is a pronoun?",
+        answer: "A pronoun is a word that takes the place of one or more nouns.",
+        example: "He, she, it, they, and we are pronouns."
       },
 
-      // 2. 几何概念与作图方法
+      // 2. G3 级别词性实战练习题 (下划线辨析: Noun, Verb, Adjective, Adverb, Pronoun)
+      {
+        category: "English",
+        term: "Part of Speech #1",
+        question: "Identify the part of speech of the underlined word: The <u>brave</u> knight protected the castle.",
+        speechQuestion: "Identify the part of speech of the word 'brave' in the sentence: The brave knight protected the castle.",
+        answer: "Adjective. 'Brave' describes the noun 'knight'.",
+        example: "What kind of knight? A brave knight."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #2",
+        question: "Identify the part of speech of the underlined word: The cheetah sprinted <u>swiftly</u> across the grass.",
+        speechQuestion: "Identify the part of speech of the word 'swiftly' in the sentence: The cheetah sprinted swiftly across the grass.",
+        answer: "Adverb. 'Swiftly' describes how the cheetah sprinted.",
+        example: "Adverbs often tell how, when, or where an action happens."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #3",
+        question: "Identify the part of speech of the underlined word: <u>They</u> visited the science museum yesterday.",
+        speechQuestion: "Identify the part of speech of the word 'They' in the sentence: They visited the science museum yesterday.",
+        answer: "Pronoun. 'They' takes the place of the people who visited.",
+        example: "Instead of repeating names, we use the pronoun 'they'."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #4",
+        question: "Identify the part of speech of the underlined word: Heavy <u>rain</u> fell all night long.",
+        speechQuestion: "Identify the part of speech of the word 'rain' in the sentence: Heavy rain fell all night long.",
+        answer: "Noun. Here, 'rain' is a thing described by the adjective 'heavy'.",
+        example: "Tip: Words like 'rain' can be a noun or a verb depending on how they are used!"
+      },
+      {
+        category: "English",
+        term: "Part of Speech #5",
+        question: "Identify the part of speech of the underlined word: The students <u>solved</u> the tricky math puzzle.",
+        speechQuestion: "Identify the part of speech of the word 'solved' in the sentence: The students solved the tricky math puzzle.",
+        answer: "Verb. 'Solved' shows the action that the students did.",
+        example: "Action verbs tell what the subject is doing."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #6",
+        question: "Identify the part of speech of the underlined word: Please put your backpack beside <u>her</u>.",
+        speechQuestion: "Identify the part of speech of the word 'her' in the sentence: Please put your backpack beside her.",
+        answer: "Pronoun. 'Her' replaces a girl's or woman's name.",
+        example: "Me, him, her, us, and them are object pronouns."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #7",
+        question: "Identify the part of speech of the underlined word: The turtle walked <u>slowly</u> toward the pond.",
+        speechQuestion: "Identify the part of speech of the word 'slowly' in the sentence: The turtle walked slowly toward the pond.",
+        answer: "Adverb. 'Slowly' modifies the verb 'walked'.",
+        example: "How did the turtle walk? Slowly."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #8",
+        question: "Identify the part of speech of the underlined word: Grandma enjoys a <u>daily</u> walk in the park.",
+        speechQuestion: "Identify the part of speech of the word 'daily' in the sentence: Grandma enjoys a daily walk in the park.",
+        answer: "Adjective. Even though 'daily' ends in '-ly', here it describes the noun 'walk'.",
+        example: "What kind of walk? A daily walk."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #9",
+        question: "Identify the part of speech of the underlined word: Our new neighbor is a very <u>friendly</u> person.",
+        speechQuestion: "Identify the part of speech of the word 'friendly' in the sentence: Our new neighbor is a very friendly person.",
+        answer: "Adjective. 'Friendly' ends in '-ly', but it describes the noun 'person'.",
+        example: "Friendly, lovely, and silly are adjectives, not adverbs!"
+      },
+      {
+        category: "English",
+        term: "Part of Speech #10",
+        question: "Identify the part of speech of the underlined word: She picked a bouquet of <u>lovely</u> flowers.",
+        speechQuestion: "Identify the part of speech of the word 'lovely' in the sentence: She picked a bouquet of lovely flowers.",
+        answer: "Adjective. 'Lovely' describes the noun 'flowers'.",
+        example: "Not every word ending in '-ly' is an adverb."
+      },
+      {
+        category: "English",
+        term: "Part of Speech #11",
+        question: "Identify the part of speech of the underlined word: The clown made a <u>silly</u> face to make us laugh.",
+        speechQuestion: "Identify the part of speech of the word 'silly' in the sentence: The clown made a silly face to make us laugh.",
+        answer: "Adjective. 'Silly' describes the noun 'face'.",
+        example: "What kind of face? A silly face."
+      },
+
+      // 3. 数学平方与圆、几何核心概念
+      {
+        category: "Math",
+        term: "Square a Number",
+        question: "What does it mean to square a number?",
+        answer: "To square a number means to multiply that number by itself.",
+        example: "To square 4, calculate 4 times 4, which equals 16."
+      },
+      {
+        category: "Math",
+        term: "Perfect Square",
+        question: "What is a perfect square?",
+        answer: "A number that is the product of a whole number multiplied by itself.",
+        example: "9, 16, 25, and 36 are perfect squares."
+      },
+      {
+        category: "Math",
+        term: "Radius",
+        question: "What is the radius of a circle?",
+        answer: "A line segment from the center of a circle to any point on its boundary.",
+        example: "The radius is always half the length of the diameter."
+      },
+      {
+        category: "Math",
+        term: "Diameter",
+        question: "What is the diameter of a circle?",
+        answer: "A line segment that passes through the center of a circle and connects two points on its boundary.",
+        example: "The diameter cuts a circle into two equal halves."
+      },
+      {
+        category: "Math",
+        term: "Endpoints",
+        question: "What are endpoints?",
+        answer: "Points at which a line segment or a ray ends.",
+        example: "A line segment has two endpoints, while a ray has one."
+      },
       {
         category: "Math",
         term: "Vertex",
@@ -184,33 +326,40 @@
       },
       {
         category: "Math",
-        term: "How to Draw Parallel Lines",
-        question: "How do you draw parallel lines?",
-        answer: "Draw two straight lines going in the exact same direction that stay the same distance apart so they never cross.",
-        example: "Like drawing the two rails of a train track."
+        term: "Parallel Lines",
+        question: "What are parallel lines?",
+        answer: "Lines that go in the same direction and stay the same distance apart without ever crossing.",
+        example: "Train tracks are parallel lines."
       },
       {
         category: "Math",
-        term: "How to Draw Intersecting Rays",
-        question: "How do you draw intersecting rays?",
-        answer: "Draw two rays that each start at an endpoint, go forever in one direction, and cross or meet at one common point.",
-        example: "Each ray must have one dot at the start and one arrow at the other end."
+        term: "Intersecting Rays",
+        question: "What are intersecting rays?",
+        answer: "Two rays that cross or meet at a single common point.",
+        example: "Two rays sharing a common endpoint form an angle."
       },
       {
         category: "Math",
-        term: "How to Draw Perpendicular Line Segments",
-        question: "How do you draw perpendicular line segments?",
-        answer: "Draw two line segments with endpoints at both ends that meet or cross to form a square corner, or a 90-degree right angle.",
-        example: "Like drawing the letter L or a plus sign with endpoints."
+        term: "Perpendicular Line Segments",
+        question: "What are perpendicular line segments?",
+        answer: "Line segments that meet or cross to form square corners, or 90-degree right angles.",
+        example: "Adjacent sides of a rectangle are perpendicular line segments."
       },
 
-      // 3. 估算思维与乘法三大性质
+      // 4. 乘法表、三大性质与估算思维
       {
         category: "Thinking",
         term: "Reasonable Estimate",
         question: "What is a reasonable estimate?",
         answer: "An educated guess close to the exact answer, found by rounding numbers to make math easier.",
         example: "Rounding $48 to $50 gives a reasonable estimate."
+      },
+      {
+        category: "Thinking",
+        term: "Multiplication Table",
+        question: "What is a multiplication table?",
+        answer: "A grid or chart showing the products of pairs of numbers multiplied together.",
+        example: "Find 6 times 7 by finding where row 6 and column 7 meet."
       },
       {
         category: "Thinking",
@@ -241,7 +390,7 @@
         example: "25 times 0 equals 0."
       },
 
-      // 4. 英语修辞与语法比较级
+      // 5. 英语修辞与比较级/最高级
       {
         category: "English",
         term: "Alliteration",
@@ -284,6 +433,7 @@
     let timerId = null;
     let countdownInterval = null;
 
+    // 渲染当前题目卡片（支持安全渲染下划线标记）
     function renderCard() {
       const item = flashcards[currentIndex];
       const tagEl = document.getElementById('category-tag');
@@ -292,13 +442,14 @@
       tagEl.className = `tag tag-${item.category.toLowerCase()}`;
       
       document.getElementById('term-text').innerText = item.term;
-      document.getElementById('definition-text').innerText = item.question;
+      document.getElementById('definition-text').innerHTML = item.question;
       
       const exampleEl = document.getElementById('example-text');
       exampleEl.classList.add('hidden');
       document.getElementById('status').innerText = `已准备好第 ${currentIndex + 1} 题。`;
     }
 
+    // 手动秒出答案
     function showAnswer() {
       stopAudioFlow();
       const item = flashcards[currentIndex];
@@ -312,7 +463,7 @@
       document.getElementById('status').innerText = "已手动公布答案。";
     }
 
-    // 智能筛选最流畅的女声 (Female Voice)
+    // 智能筛选最流畅的自然英文女声
     function speakText(text, callback) {
       if (!('speechSynthesis' in window)) {
         if (callback) callback();
@@ -344,7 +495,7 @@
       window.speechSynthesis.speak(utter);
     }
 
-    // 8 秒倒计时功能
+    // 精确 8 秒倒计时功能
     function startCountdown(sec, callback) {
       let left = sec;
       document.getElementById('status').innerText = `思考中...（还剩 ${left} 秒公布答案）`;
@@ -361,13 +512,17 @@
       }, 1000);
     }
 
+    // 自动音频循环主流程
     function playFlow() {
       if (!isPlaying) return;
       renderCard();
       const item = flashcards[currentIndex];
       document.getElementById('status').innerText = "正在提问...";
 
-      speakText(`Question ${currentIndex + 1}. ${item.question}`, () => {
+      // 若包含专用纯语音播报文本（避免读出 HTML 标签），优先使用 speechQuestion
+      const spokenQ = item.speechQuestion ? item.speechQuestion : item.question.replace(/<[^>]*>/g, '');
+
+      speakText(`Question ${currentIndex + 1}. ${spokenQ}`, () => {
         if (!isPlaying) return;
 
         // 留出严格的 8 秒思考时间
@@ -375,7 +530,11 @@
           if (!isPlaying) return;
 
           document.getElementById('definition-text').innerText = item.answer;
-          document.getElementById('example-text').classList.remove('hidden');
+          const exampleEl = document.getElementById('example-text');
+          if (item.example) {
+            exampleEl.innerText = `Example: ${item.example}`;
+            exampleEl.classList.remove('hidden');
+          }
           document.getElementById('status').innerText = "公布正确答案...";
 
           let ansText = `Answer: ${item.answer}`;
